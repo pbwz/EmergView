@@ -12,3 +12,5 @@ EmergView runs in two parts:
 ## DISCLAIMER ##
 While the goal of this project is to predict emergency room wait times and predict optimal hospital routes at
 a given time, this data is meant for educational purposes and **SHOULD NOT BE USED IN ACTUAL EMERGENCY SITUATIONS**!
+
+**If you are in need of emergency medical assitance, please call 911**
