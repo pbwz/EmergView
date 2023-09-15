@@ -4,6 +4,8 @@ Using this data, EmergView's algorithm can attempt to predict future wait times 
 the province. EmergView also has the functionality to recommend a hospital emergency room basedoff of a given
 location and traffic data collected from an API.
 
+**Please note: Development relies on statistical analysis of collected data thus will be slow**
+
 # Information
 EmergView runs in two parts:
   - An script running on a server or Raspberry Pi that requests AHS emergency data every 5 minutes and collects the data.
