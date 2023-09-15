@@ -65,6 +65,7 @@ class Watcher:
         Returns API connection status code
         '''
         self.response = requests.get(BASE_URL)
+        self.start_time = time.time()
 
         return self.response.status_code
         
@@ -111,6 +112,9 @@ class Watcher:
             # join and write
             fmtd_string = ','.join(package_data)
             self.write_data(file_name, fmtd_string)
+
+        # finished executing
+            self.end_time = time.time()
         
     def format_wait_time(self, wait_time):
         '''
@@ -146,6 +150,13 @@ class Watcher:
         now = datetime.now()
         c_time = now.strftime("%H:%M")
         return c_time
+
+    def get_execution_time(self):
+        '''
+        Returns the amount of time Watcher took
+        to execute the last full cycle
+        '''
+        return self.end_time - self.start_time
     
 def main():
     watcher = Watcher()
@@ -154,7 +165,10 @@ def main():
     while True and response == 200:
         response = watcher.connect()
         watcher.run()
-        time.sleep(WAIT_TIME)
+        
+        # ensures next call happens exactly 5 mins later
+        time_elapsed = watcher.get_execution_time()
+        time.sleep(WAIT_TIME - time_elapsed)
     
 if __name__ == '__main__':
     main()
