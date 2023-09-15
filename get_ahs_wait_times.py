@@ -91,12 +91,12 @@ class Watcher:
         Formats the raw JSON data into usable data. Should return nested
         lists of hospitals and wait times.
         '''
-        date = self.get_date()
-        time = self.get_time()
+        c_date = self.get_date()
+        c_time = self.get_time()
         
         # iterate through packages
         for package in ALL_PACKAGES:
-            package_data = [date,time]
+            package_data = [c_date,c_time]
             
             file_name = package[0]
             city = package[1]
