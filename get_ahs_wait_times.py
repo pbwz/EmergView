@@ -67,13 +67,13 @@ class Watcher:
             col_vals = table[1]
             self._database.create_table(name, col_vals)
         
-    def start(self) -> None:
+    def start(self, loop = False) -> None:
         '''Call to start API data collection loop.
         Cannot run unless database setup has been called.
         
-        Input: None
+        Input: bool - loop
         Return: None'''
-        if not self._loop:
+        if not self._loop and loop:
             self._loop = True
             time.sleep(self._get_start_time())  # spec start
             
@@ -89,8 +89,11 @@ class Watcher:
                 time_elapsed = end_time - start_time
                 time.sleep(WAIT_TIME - time_elapsed)
                 
-        else:
+        elif self._loop:
             raise Exception('Already started!')
+        
+        else:
+            self._write_snapshot()
         
     def stop(self) -> None:
         '''Stops API data collection loop
